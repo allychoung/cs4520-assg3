@@ -31,25 +31,21 @@ class MVPFragment : Fragment(), MVPContract.View {
         presenter = CalculatorPresenter(CalculatorModel(), this);
 
         binding.addBtn.setOnClickListener{
-            Log.i("Add btn listener", "Clicked add button")
             presenter.onButtonClick(Operation.ADD,
                 binding.num1Input.text.toString(), binding.num2Input.text.toString())
         }
 
         binding.subBtn.setOnClickListener{
-            Log.i("Sub btn listener", "Clicked sub button")
             presenter.onButtonClick(Operation.SUB,
                 binding.num1Input.text.toString(), binding.num2Input.text.toString())
         }
 
         binding.mulBtn.setOnClickListener{
-            Log.i("Mul btn listener", "Clicked mul button")
             presenter.onButtonClick(Operation.MUL,
                 binding.num1Input.text.toString(), binding.num2Input.text.toString())
         }
 
         binding.divBtn.setOnClickListener{
-            Log.i("Div btn listener", "Clicked div button")
             presenter.onButtonClick(Operation.DIV,
                 binding.num1Input.text.toString(), binding.num2Input.text.toString())
         }

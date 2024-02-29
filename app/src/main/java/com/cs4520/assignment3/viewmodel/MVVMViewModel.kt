@@ -10,8 +10,8 @@ class MVVMViewModel() : ViewModel() {
 
     public var result = MutableLiveData<Number>()
 
-    fun calculate(op : Operation, input1: String, input2: String) {
-         result.value = model.updateResult(input1.toFloat(), input2.toFloat(), op)
+    fun updateResult(op : Operation, input1: String, input2: String) {
+         result.value = model.calculate(input1.toFloat(), input2.toFloat(), op)
     }
 
 }

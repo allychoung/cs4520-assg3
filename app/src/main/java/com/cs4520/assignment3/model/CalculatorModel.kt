@@ -2,10 +2,8 @@ package com.cs4520.assignment3.model
 
 import com.cs4520.assignment3.data.Operation
 
-data class Calculator(val result: Number)
-
 class CalculatorModel {
-    fun updateResult(i1: Float, i2: Float, op: Operation): Number {
+    fun calculate(i1: Float, i2: Float, op: Operation): Number {
         if (i2.isNaN() || i1.isNaN()) {
             throw IllegalArgumentException("Invalid user input. Try again.")
         }

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.cs4520.assignment3.data.Operation
 import com.cs4520.assignment3.databinding.FragmentCalculatorBinding
 import com.cs4520.assignment3.viewmodel.MVVMViewModel
+import java.lang.NumberFormatException
 
 class MVVMFragment : Fragment() {
     private var _binding: FragmentCalculatorBinding? = null
@@ -39,52 +40,52 @@ class MVVMFragment : Fragment() {
 
         binding.addBtn.setOnClickListener {
             try {
-                viewModel!!.calculate(Operation.ADD,
+                viewModel!!.updateResult(Operation.ADD,
                     binding.num1Input.text.toString(), binding.num2Input.text.toString())
             } catch (e: Exception) {
-                showToast(e.message)
+                showToast(e)
             }
             clearInputs()
         }
 
         binding.subBtn.setOnClickListener {
             try {
-                viewModel!!.calculate(Operation.SUB,
+                viewModel!!.updateResult(Operation.SUB,
                     binding.num1Input.text.toString(), binding.num2Input.text.toString())
             } catch (e: Exception) {
-                showToast(e.message)
+                showToast(e)
             }
             clearInputs()
         }
 
         binding.mulBtn.setOnClickListener {
             try {
-                viewModel!!.calculate(Operation.MUL,
+                viewModel!!.updateResult(Operation.MUL,
                     binding.num1Input.text.toString(), binding.num2Input.text.toString())
             } catch (e: Exception) {
-                showToast(e.message)
+                showToast(e)
             }
             clearInputs()
         }
 
         binding.divBtn.setOnClickListener {
             try {
-                viewModel!!.calculate(Operation.DIV,
+                viewModel!!.updateResult(Operation.DIV,
                     binding.num1Input.text.toString(), binding.num2Input.text.toString())
             } catch (e: Exception) {
-                showToast(e.message)
+                showToast(e)
             }
             clearInputs()
         }
     }
 
-    private fun showToast(message: String?) {
-        if (message == null || message == "") {
+    private fun showToast(e: Exception) {
+        if (e is NumberFormatException) {
             Toast.makeText(this.context,
                 "Invalid input. Try again.",
                 Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this.context, e.message, Toast.LENGTH_SHORT).show()
         }
     }
 

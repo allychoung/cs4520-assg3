@@ -28,8 +28,10 @@ public interface MVPContract {
     interface Presenter {
         val view: View
         val model: CalculatorModel
-        fun onButtonClick(op: Operation, input1: String, input2: String);
 
-        fun onDestroy();
+        /**
+         * Handles a button click event
+         */
+        fun onButtonClick(op: Operation, input1: String, input2: String);
     }
 }
