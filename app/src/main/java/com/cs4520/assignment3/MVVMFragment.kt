@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.cs4520.assignment3.data.Operation
 import com.cs4520.assignment3.databinding.FragmentCalculatorBinding
@@ -31,13 +33,65 @@ class MVVMFragment : Fragment() {
 
         viewModel = ViewModelProvider(this)[MVVMViewModel::class.java]
 
-        binding.viewModel
+        viewModel!!.result.observe(viewLifecycleOwner, Observer {
+            binding.calcResult.text = "Result: $it"
+        })
+
         binding.addBtn.setOnClickListener {
-            val res = viewModel!!.getResult(Operation.ADD)
-            binding.calcResult.text = "Result: ${res}"
+            try {
+                viewModel!!.calculate(Operation.ADD,
+                    binding.num1Input.text.toString(), binding.num2Input.text.toString())
+            } catch (e: Exception) {
+                showToast(e.message)
+            }
+            clearInputs()
         }
 
+        binding.subBtn.setOnClickListener {
+            try {
+                viewModel!!.calculate(Operation.SUB,
+                    binding.num1Input.text.toString(), binding.num2Input.text.toString())
+            } catch (e: Exception) {
+                showToast(e.message)
+            }
+            clearInputs()
+        }
 
+        binding.mulBtn.setOnClickListener {
+            try {
+                viewModel!!.calculate(Operation.MUL,
+                    binding.num1Input.text.toString(), binding.num2Input.text.toString())
+            } catch (e: Exception) {
+                showToast(e.message)
+            }
+            clearInputs()
+        }
+
+        binding.divBtn.setOnClickListener {
+            try {
+                viewModel!!.calculate(Operation.DIV,
+                    binding.num1Input.text.toString(), binding.num2Input.text.toString())
+            } catch (e: Exception) {
+                showToast(e.message)
+            }
+            clearInputs()
+        }
+    }
+
+    private fun showToast(message: String?) {
+        if (message == null || message == "") {
+            Toast.makeText(this.context,
+                "Invalid input. Try again.",
+                Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    private fun clearInputs() {
+        binding.num1Input.text.clear()
+        binding.num2Input.text.clear()
     }
 
 

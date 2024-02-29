@@ -8,13 +8,10 @@ import com.cs4520.assignment3.model.CalculatorModel
 class MVVMViewModel() : ViewModel() {
     private val model = CalculatorModel()
 
-    private var liveInput1 = MutableLiveData<Number>()
-    private var liveInput2 = MutableLiveData<Number>()
-    private var calcResult = MutableLiveData<Number>()
+    public var result = MutableLiveData<Number>()
 
-    fun getResult(op : Operation): Number {
-//        TODO
-        return 1
+    fun calculate(op : Operation, input1: String, input2: String) {
+         result.value = model.updateResult(input1.toFloat(), input2.toFloat(), op)
     }
 
 }
